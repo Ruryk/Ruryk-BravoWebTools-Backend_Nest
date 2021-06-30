@@ -87,7 +87,7 @@ export class AuthenticationService {
       if (user && user.code === code) {
         resolve({ status: 200 });
       }
-      reject({ status: 401, message: 'Incorrect code' });
+      resolve({ status: 401, message: 'Incorrect code' });
     });
   }
 
