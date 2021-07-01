@@ -6,7 +6,6 @@ export type CatalogDocument = Catalog & Document;
 
 @Schema()
 export class Catalog {
-  @Prop() _id: string;
   @Prop() code: string;
   @Prop() name: string;
   @Prop() units: UnitsDto[];

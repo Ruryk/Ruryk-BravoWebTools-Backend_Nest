@@ -16,8 +16,18 @@ export class CatalogService {
     return this.catalogModel.find({});
   }
 
-  async addNewCatalog(data: CatalogDto): Promise<any> {
-    console.log(data);
-    return this.catalogModel.insertMany([data]);
+  async addNewCatalog(data: CatalogDto): Promise<boolean> {
+    await this.catalogModel.create({ ...data });
+    return this.catalogModel.exists({ code: data.code });
+  }
+
+  async editCatalog(data: CatalogDto, code: string): Promise<boolean> {
+    await this.catalogModel.updateOne({ code: code }, { ...data });
+    return this.catalogModel.exists({ code: data.code });
+  }
+
+  async deleteCatalog(code: string): Promise<boolean> {
+    await this.catalogModel.findOneAndDelete({ code });
+    return this.catalogModel.exists({ code });
   }
 }

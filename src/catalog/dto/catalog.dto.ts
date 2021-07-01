@@ -1,7 +1,6 @@
 import { UnitsDto } from './units.dto';
 
 export class CatalogDto {
-  _id: string;
   code: string;
   name: string;
   units: UnitsDto[];

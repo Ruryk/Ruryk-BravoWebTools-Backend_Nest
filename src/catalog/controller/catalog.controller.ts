@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { CatalogService } from '../service/catalog.service';
 import { CatalogDto } from '../dto/catalog.dto';
 
@@ -13,8 +13,17 @@ export class CatalogController {
   }
 
   @Post('new')
-  addNewCatalog(@Body() dataCatalog: CatalogDto): Promise<boolean> {
-    console.log(dataCatalog);
-    return this.catalogService.addNewCatalog(dataCatalog);
+  addNewCatalog(@Body() dataCatalog: { data: CatalogDto }): Promise<boolean> {
+    return this.catalogService.addNewCatalog(dataCatalog.data);
+  }
+
+  @Post('edit')
+  editCatalog(@Body() dataCatalog: { data: CatalogDto, code: string }): Promise<boolean> {
+    return this.catalogService.editCatalog(dataCatalog.data, dataCatalog.code);
+  }
+
+  @Post('delete')
+  deleteCatalog(@Body() dataCatalog: { code: string }): Promise<boolean> {
+    return this.catalogService.deleteCatalog(dataCatalog.code);
   }
 }
