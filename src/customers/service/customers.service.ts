@@ -23,7 +23,7 @@ export class CustomersService {
   }
 
   async editCustomers(data: CustomersDto, code: string): Promise<boolean> {
-    await this.customersModel.updateOne({ code: code }, { ...data });
-    return this.customersModel.exists({ code: data.customerNo });
+    await this.customersModel.updateOne({ customerNo: code }, { ...data });
+    return this.customersModel.exists({ customerNo: data.customerNo });
   }
 }
