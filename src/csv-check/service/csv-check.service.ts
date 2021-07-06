@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import { InjectModel } from '@nestjs/mongoose';
 import { Catalog, CatalogDocument } from '../../catalog/schemas/catalog.schema';
 import { Model } from 'mongoose';
+import { CatalogDto } from '../../catalog/dto/catalog.dto';
 
 const headersValidation = {
   code: '',
@@ -17,6 +18,9 @@ const headersValidation = {
 
 @Injectable()
 export class CsvCheckService {
+
+  public readFile;
+
   constructor(
     @InjectModel(Catalog.name)
     private catalogModel: Model<CatalogDocument>,
@@ -57,12 +61,18 @@ export class CsvCheckService {
             Object.keys(item).every((key) => item[key] === true),
           );
           if (validState) {
-            this.catalogModel.deleteMany({}).exec();
-            this.catalogModel.insertMany([...filesArr]);
+            this.readFile = filesArr;
           }
           resolve({ status: validState, errors });
         });
     });
+  }
+
+  async replaceCatalog(): Promise<any> {
+    await this.catalogModel.deleteMany({}).exec();
+    await this.catalogModel.insertMany([...this.readFile]);
+    const res = await this.catalogModel.find({}).exec();
+    return new Promise((resolve, reject) => resolve(res.length > 0));
   }
 
   csvValidation(files): any {

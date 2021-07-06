@@ -36,4 +36,9 @@ export class CsvCheckController {
     const readFile = await this.csvService.parse(file);
     return readFile;
   }
+
+  @Post('replace')
+  async replaceCatalog(@UploadedFile() file: any): Promise<boolean> {
+    return this.csvService.replaceCatalog();
+  }
 }
