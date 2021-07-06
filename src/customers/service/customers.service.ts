@@ -10,8 +10,7 @@ export class CustomersService {
   constructor(
     @InjectModel(Customers.name)
     private customersModel: Model<CustomersDocument>,
-  ) {
-  }
+  ) {}
 
   async getAllCustomers(): Promise<CustomersDto[]> {
     return this.customersModel.find({});
@@ -19,7 +18,7 @@ export class CustomersService {
 
   async addNewCustomers(data: CustomersDto): Promise<boolean> {
     await this.customersModel.create({ ...data });
-    return this.customersModel.exists({ code: data.customerNo });
+    return this.customersModel.exists({ customerNo: data.customerNo });
   }
 
   async editCustomers(data: CustomersDto, code: string): Promise<boolean> {

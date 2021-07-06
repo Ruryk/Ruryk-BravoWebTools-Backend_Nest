@@ -1,0 +1,46 @@
+[{
+  "_id": {
+    "$oid": "60dc6962fc522044cf429860"
+  },
+  "code": "CUC997",
+  "name": "Cucumbers",
+  "units": [
+    {
+      "unit": "pcs",
+      "price": "0.5"
+    }
+  ],
+  "availability": "Out of stock",
+  "actions": "trash",
+  "exclusively": [
+    "CUC997"
+  ],
+  "replacementProducts": [
+    "13423-kd"
+  ]
+},{
+  "_id": {
+    "$oid": "60dc6980fc522044cf429861"
+  },
+  "code": "TOM53",
+  "name": "Tomatoes",
+  "units": [
+    {
+      "unit": "box",
+      "price": "5.2"
+    },
+    {
+      "unit": "kg",
+      "price": "2.03"
+    }
+  ],
+  "availability": "In stock",
+  "actions": "trash",
+  "exclusively": [
+    "TOM53",
+    "APP123"
+  ],
+  "replacementProducts": [
+    "13423-kd"
+  ]
+}]
