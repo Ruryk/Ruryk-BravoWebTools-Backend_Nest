@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 import { OrdersService } from '../service/orders.service';
 import { OrdersDto } from '../dto/orders.dto';
@@ -9,8 +9,13 @@ export class OrdersController {
   }
 
   @Get()
-  getAllCustomers(): Promise<OrdersDto[]> {
+  getAllOrders(): Promise<OrdersDto[]> {
     return this.ordersService.getAllOrders();
+  }
+
+  @Get(':id')
+  getOrderById(@Param() id: { id: string }): Promise<OrdersDto[]> {
+    return this.ordersService.getOrderById(id.id);
   }
 
   @Post('confirm')

@@ -1,12 +1,10 @@
 import {
-  Body,
   Controller,
   Post,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { FileErrorsDto } from '../dto/fileErrorsDto';
 import { CsvCheckService } from '../service/csv-check.service';
 
 import { diskStorage } from 'multer';

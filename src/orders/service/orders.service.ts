@@ -16,6 +16,10 @@ export class OrdersService {
     return this.ordersModel.find({});
   }
 
+  async getOrderById(id: string): Promise<OrdersDto[]> {
+    return this.ordersModel.find({ orderNo: Number(id) });
+  }
+
   async confirmOrders(code: number): Promise<boolean> {
     await this.ordersModel.updateOne({ orderNo: code }, { status: true });
     return this.ordersModel.exists({ orderNo: code, status: true });
